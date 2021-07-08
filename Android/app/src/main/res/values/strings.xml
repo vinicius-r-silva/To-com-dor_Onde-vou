@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ToComDor</string>
+    <string name="initialTitle">Bem-Vindo </string>
+    <string name="initialButton">TO COM DOR? ONDE VOU?</string>
+    <string name="nearbyPlacesTitle">UNIDADE DE SAÚDE</string>
+    <string name="unityHint">Nome da unidade</string>
+    <string name="addressLabel">ENDEREÇO</string>
+    <string name="addressHint">endereço</string>
+    <string name="telephoneLabel">TELEFONE</string>
+    <string name="telephoneHint">telefone</string>
+</resources>
