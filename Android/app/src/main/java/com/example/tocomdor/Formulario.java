@@ -7,7 +7,7 @@ public class Formulario {
     List<String> perText = new ArrayList<>();
     List<Pergunta> perMult = new ArrayList<>();
 
-    public Formulario(){
+    public Formulario() {
         //perguntas de S/N
         perSN.add("Teve febre nos últimos 7 dias?");
         perSN.add("Teve calafrios nos últimos 7 dias?");
@@ -20,10 +20,10 @@ public class Formulario {
         perSN.add("O paciente teve contato próximo com uma pessoa que seja caso SUSPEITO de Novo Coronavírus (COVID-19)?");
         perSN.add("O paciente teve contato próximo com uma pessoa que seja caso CONFIRMADO de Novo Coronavírus (COVID-19)?");
         perSN.add("Esteve em alguma unidade de saúde e/ou hospital (UBS) nos 14 dias antes do início dos sintomas?");
+        perSN.add("Foi vacinada?");
 
         //perguntas de caixa de texto
         perText.add("Qual a idade do paciente?");
-        perText.add("Foi vacinada?");
 
         //perguntas de multiplas respostas
         String perMulTemp = "Você possui alguma comorbidade";
