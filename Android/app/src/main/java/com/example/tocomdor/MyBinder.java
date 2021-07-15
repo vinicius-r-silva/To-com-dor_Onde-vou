@@ -2,10 +2,14 @@ package com.example.tocomdor;
 
 import android.os.Binder;
 
-public class RespostaBinder extends Binder {
-    private Resposta resposta;
+public class MyBinder extends Binder {
+    private Object object;
 
-    public RespostaBinder(Resposta res){
-        resposta = res;
+    public MyBinder(Object obj){
+        object = obj;
+    }
+
+    public Object getObject(){
+        return object;
     }
 }

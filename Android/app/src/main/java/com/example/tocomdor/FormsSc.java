@@ -7,9 +7,12 @@ import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -18,19 +21,35 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
 public class FormsSc extends AppCompatActivity {
 
+    float lat;
+    float lon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forms_sc);
 
-        LayoutInflater layoutInflater = getLayoutInflater();
+        lat = 0;
+        lon = 0;
 
+        if(getIntent().hasExtra("com.example.tocomdor.lat")){
+            lat = getIntent().getExtras().getFloat("com.example.tocomdor.lat");
+        }
+
+        if(getIntent().hasExtra("com.example.tocomdor.lon")){
+            lon = getIntent().getExtras().getFloat("com.example.tocomdor.lon");
+        }
+
+        LayoutInflater layoutInflater = getLayoutInflater();
         LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
 
         Formulario forms = new Formulario();
@@ -53,13 +72,11 @@ public class FormsSc extends AppCompatActivity {
             int finalI = i;
             yesBut.setOnClickListener(v -> {
                 respostasSN.remove(finalI);
-
                 respostasSN.add(finalI, true);
             });
 
             noBut.setOnClickListener(v -> {
                 respostasSN.remove(finalI);
-
                 respostasSN.add(finalI, false);
             });
 
@@ -69,16 +86,62 @@ public class FormsSc extends AppCompatActivity {
             questionsLayout.addView(view);
         }
 
+        Hashtable<String, Boolean> perguntasText = forms.getPerText();
+
+        int txtQuestCount = perguntasText.size();
+
+        List<String> respostasText = new ArrayList<>(txtQuestCount);
+        List<String> keys = Collections.list(perguntasText.keys());
+
+        for(i = 0; i < txtQuestCount; i++){
+            respostasText.add("");
+            String text = keys.get(i);
+
+            int finalI = i;
+
+            if(perguntasText.get(text)){
+                View view = layoutInflater.inflate(R.layout.num_questions, null);
+                TextView tv = (TextView) view.findViewById(R.id.question_tv);
+
+                EditText answerTxt = (EditText) view.findViewById(R.id.answer_tv);
+                answerTxt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        respostasText.remove(finalI);
+                        String txtChanged = s.toString();
+                        respostasText.add(finalI, txtChanged);
+                    }
+                });
+
+                tv.setText(text);
+                questionsLayout.addView(view);
+            }
+        }
+
         TextView sendBut = (TextView) findViewById(R.id.sendButton);
 
         sendBut.setOnClickListener(v -> {
-            for(int j = 0; j < pergCount; j++){
-                if(respostasSN.get(j)){
-                    Log.d("tag " + j, "true");
-                }else{
-                    Log.d("tag " + j, "false");
-                }
-            }
+            Resposta resposta = new Resposta();
+
+            resposta.setResSN(respostasSN);
+            resposta.setResText(respostasText);
+
+            MyParcelable parc = new MyParcelable();
+            parc.setObject(resposta);
+
+            Intent resultScreenIntent = new Intent(getApplicationContext(), ResultScreen.class);
+
+            resultScreenIntent.putExtra("com.example.tocomdor.Resposta", parc);
+            resultScreenIntent.putExtra("com.example.tocomdor.lat", lat);
+            resultScreenIntent.putExtra("com.example.tocomdor.lon", lon);
+
+            startActivity(resultScreenIntent);
         });
     }
 }

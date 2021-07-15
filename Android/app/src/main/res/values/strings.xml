@@ -11,5 +11,7 @@
     <string name="title_activity_forms_screen">ScrollingActivity</string>
     <string name="formsScreenTitle">DESCREVA SEUS SINTOMAS</string>
     <string name="formsScreenButton">Enviar</string>
+    <string name="resultTitle">RESULTADO</string>
+    <string name="resultButton">AONDE VOU?</string>
     <string name="versao">1.0</string>
 </resources>
