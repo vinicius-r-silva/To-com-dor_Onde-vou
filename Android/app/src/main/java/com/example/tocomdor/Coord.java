@@ -16,13 +16,17 @@ public class Coord{
 	}
 
 	public float calcDist(Coord pos){
-		//haversine formula
-		float dlon = pos.lon - lon;
-		float dlat = pos.lat - lat;
-		float a = (float) (Math.pow(Math.sin(dlat/2),2) + Math.cos(lat) * Math.cos(pos.lat) * Math.pow(Math.sin(dlon/2),2));
+		double lat1 = pos.lat;
+		double lat2 = lat;
+		double lon1 = pos.lon;
+		double lon2 = lon;
 
-		//Radius of earth in kilometers is 6371
-		return (float) (6371* (2 * Math.asin(Math.sqrt(a))));
+		double p = 0.017453292519943295;    // Math.PI / 180
+		double a = 0.5 - Math.cos((lat2 - lat1) * p)/2 +
+				Math.cos(lat1 * p) * Math.cos(lat2 * p) *
+							(1 - Math.cos((lon2 - lon1) * p))/2;
+
+		return (float) (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
 	}
 
 	public float quickDist(Coord pos){

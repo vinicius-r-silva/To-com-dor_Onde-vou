@@ -54,6 +54,7 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         for (int i = 0; i < locais.size(); i++){
             Log.d("DistLocal", i + ": " + locais.get(i).getDist());
         }
+        Log.d("Dist minha", "lat: " + pos.lat + ", lo: " + pos.lon);
 
         //Estabelecimento estab = new Estabelecimento("Google", "(650) 253-0000", "empresa", "0001", "rua zero", 1234, 37.7749f, -122.4194f);
         Estabelecimento estab = locais.get(0);
