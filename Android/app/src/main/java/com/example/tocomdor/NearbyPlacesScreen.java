@@ -14,8 +14,7 @@ public class NearbyPlacesScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_places_screen);
-
-        Estabelecimento estab = new Estabelecimento("Google", "(650) 253-0000", "empresa", 1234, 37.7749f, -122.4194f, 0);
+        Estabelecimento estab = new Estabelecimento("Google", "(650) 253-0000", "empresa", "0001", "rua zero", 1234, 37.7749f, -122.4194f);
         String address = "1600 Amphitheatre Parkway, Mountain+View, California";
 
         TextView npName = findViewById(R.id.npNames);

@@ -1,6 +1,7 @@
 package com.example.tocomdor;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -70,6 +71,43 @@ public class Api {
                 params.put("latitude", Float.toString(lat));
                 params.put("longitude", Float.toString(lon));
                 params.put("margem", Float.toString(range));
+
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+    }
+
+
+
+    public static void getEstabelecimentos(Resposta resp, final Context context ) {
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        //TODO add url
+        String url ="";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //TODO verificar respostas com william
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("erro", "error response volley. " + error.toString());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("latitude", Double.toString(resp.getLat()));
+                params.put("longitude", Double.toString(resp.getLon()));
+                params.put("resultado", Integer.toString(resp.getResult()));
+                params.put("resultado", "incompleto");
+                params.put("versao", Float.toString(R.string.versao));
 
                 return params;
             }

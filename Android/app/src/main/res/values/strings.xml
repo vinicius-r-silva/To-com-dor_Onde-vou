@@ -8,4 +8,5 @@
     <string name="addressHint">endereço</string>
     <string name="telephoneLabel">TELEFONE</string>
     <string name="telephoneHint">telefone</string>
+    <string name="versao">1.0</string>
 </resources>
