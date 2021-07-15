@@ -1,8 +1,5 @@
 package com.example.tocomdor;
 
-import java.util.*;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,6 +52,10 @@ public class Estabelecimento {
     public String toString() {
         return "nome: " + this.nome + ", tel: " + this.tel + ", tipo: " + this.tipo
                 + ", CNES: " + this.CNES + ", lat: " + lat + ", lon: " + lon + ", dist: " + dist;
+    }
+
+    public int compareTo(Estabelecimento e){
+        return Float.compare(dist, e.getDist());
     }
 
     public float getLat() {
@@ -118,5 +119,6 @@ public class Estabelecimento {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+
 
 }
