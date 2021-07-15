@@ -21,12 +21,9 @@ public class MainActivity extends AppCompatActivity {
         initTitle.setText(initTitle.getText().toString() + ", " + userName);
 
         TextView initButton = findViewById(R.id.initButton);
-        initButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent npScreenIntent = new Intent(getApplicationContext(), NearbyPlacesScreen.class);
-                startActivity(npScreenIntent);
-            }
+        initButton.setOnClickListener(v -> {
+            Intent formsScIntent = new Intent(getApplicationContext(), FormsSc.class);
+            startActivity(formsScIntent);
         });
 
     }
