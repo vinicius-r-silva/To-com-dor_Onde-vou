@@ -10,13 +10,13 @@ public class Resposta {
 
     int result;
 
-    double lag;
+    double lat;
     double lon;
 
     String NSUS;
 
     public Resposta(double lag, double lon, String NSUS) {
-        this.lag = lag;
+        this.lat = lag;
         this.lon = lon;
         this.NSUS = NSUS;
     }
@@ -26,7 +26,7 @@ public class Resposta {
         this.resText = resText;
         this.resMul = resMul;
         this.result = result;
-        this.lag = lag;
+        this.lat = lag;
         this.lon = lon;
         this.NSUS = NSUS;
     }
@@ -67,12 +67,12 @@ public class Resposta {
         this.result = result;
     }
 
-    public double getLag() {
-        return lag;
+    public double getLat() {
+        return lat;
     }
 
-    public void setLag(double lag) {
-        this.lag = lag;
+    public void setLag(double lat) {
+        this.lat = lat;
     }
 
     public double getLon() {
