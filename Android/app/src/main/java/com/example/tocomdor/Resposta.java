@@ -64,7 +64,7 @@ public class Resposta {
         }
 
         age = Integer.parseInt(resText.get(0));
-        quantComorb = resMul.size();
+        quantComorb = resMul.get(0).size();
 
         switch (quantSin) {
             case 0:

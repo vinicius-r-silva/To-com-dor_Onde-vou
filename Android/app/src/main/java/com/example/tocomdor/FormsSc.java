@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -56,12 +57,12 @@ public class FormsSc extends AppCompatActivity {
 
         List<String> perguntasSN = forms.getPerSN();
 
-        int pergCount = perguntasSN.size();
+        int count = perguntasSN.size();
 
-        List<Boolean> respostasSN = new ArrayList<>(pergCount);
+        List<Boolean> respostasSN = new ArrayList<>(count);
 
         int i;
-        for(i = 0; i < pergCount; i++){
+        for(i = 0; i < count; i++){
             respostasSN.add(false);
             View view = layoutInflater.inflate(R.layout.y_n_questions, null);
             TextView tv = (TextView) view.findViewById(R.id.question_tv);
@@ -88,12 +89,12 @@ public class FormsSc extends AppCompatActivity {
 
         Hashtable<String, Boolean> perguntasText = forms.getPerText();
 
-        int txtQuestCount = perguntasText.size();
+        count = perguntasText.size();
 
-        List<String> respostasText = new ArrayList<>(txtQuestCount);
+        List<String> respostasText = new ArrayList<>(count);
         List<String> keys = Collections.list(perguntasText.keys());
 
-        for(i = 0; i < txtQuestCount; i++){
+        for(i = 0; i < count; i++){
             respostasText.add("");
             String text = keys.get(i);
 
@@ -124,13 +125,49 @@ public class FormsSc extends AppCompatActivity {
             }
         }
 
+        List<Pergunta> perMult = forms.getPerMult();
+        List<List<String>> resMult = new ArrayList<>();
+        count = perMult.size();
+
+        for(i = 0; i < count; i++){
+            Pergunta perg = perMult.get(i);
+
+            View view = layoutInflater.inflate(R.layout.mult_questions, null);
+            LinearLayout altLayout = (LinearLayout) view.findViewById(R.id.answers_layout);
+
+            TextView tv = (TextView) view.findViewById(R.id.question_tv);
+            tv.setText(perg.getPer());
+
+            List<String> res = perg.getRes();
+            List<String> checked = new ArrayList<>();
+
+            for(int j = 0; j < res.size(); j++){
+                String alt = res.get(j);
+
+                View view2 = layoutInflater.inflate(R.layout.mult_answers, null);
+                TextView tv2 = (TextView) view2.findViewById(R.id.answer_tv);
+                tv2.setText(alt);
+
+                CheckBox cb = (CheckBox) view2.findViewById(R.id.answer_cb);
+                cb.setOnClickListener(v -> {
+                    if(cb.isChecked()){
+                        checked.add(alt);
+                    }else if(checked.contains(alt)){
+                        checked.remove(alt);
+                    }
+                });
+
+                altLayout.addView(view2);
+                resMult.add(checked);
+            }
+
+            questionsLayout.addView(view);
+        }
+
         TextView sendBut = (TextView) findViewById(R.id.sendButton);
 
         sendBut.setOnClickListener(v -> {
-            Resposta resposta = new Resposta();
-
-            resposta.setResSN(respostasSN);
-            resposta.setResText(respostasText);
+            Resposta resposta = new Resposta(respostasSN, respostasText, resMult, 0, lat, lon, "0");
 
             MyParcelable parc = new MyParcelable();
             parc.setObject(resposta);

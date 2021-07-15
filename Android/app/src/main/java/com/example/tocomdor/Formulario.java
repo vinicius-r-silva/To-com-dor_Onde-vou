@@ -38,9 +38,9 @@ public class Formulario {
         res.add("Diabetes Mellitus");
         res.add("Hipertensão Arterial Sistêmica/Pressão Alta");
         res.add("Cardiopatias");
-        res.add("Imunodeprimimidos (uso contínuo de corticoides, HIV, diálise/hemodiálise, quimioterapia");
+        res.add("Imunodeprimimidos (uso contínuo de corticoides, HIV, diálise/hemodiálise, quimioterapia)");
         res.add("Gestante");
-        res.add("Puérpera (mulher que teve filho até 42º dia pós parto");
+        res.add("Puérpera (mulher que teve filho até 42º dia pós parto)");
         res.add("Doenças respiratórias crônicas (enfisema pulmonar, asma, bronquite)");
 
         Pergunta perTemp = new Pergunta(perMulTemp, res);

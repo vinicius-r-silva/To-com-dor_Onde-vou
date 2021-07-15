@@ -43,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
         
         TextView initButton = findViewById(R.id.initButton);
 
-//        initButton.setOnClickListener(v -> {
-//            Intent formsScIntent = new Intent(getApplicationContext(), FormsSc.class);
-//            startActivity(formsScIntent);
-//        });
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         initButton.setOnClickListener(v -> {
-            getLastLocation();
+
+            Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
+            formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
+            formsScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
+            Log.d("Lat - lon:", pos.lat + " - " + pos.lon);
+            startActivity(formsScreenIntent);
         });
 
     }
@@ -74,10 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         pos = new Coord(location.getLatitude(), location.getLongitude());
 
-                        Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
-                        formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
-                        formsScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
-                        startActivity(formsScreenIntent);
                     }
                 });
                 return pos;
