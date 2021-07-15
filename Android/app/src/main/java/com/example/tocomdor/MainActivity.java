@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,15 +42,16 @@ public class MainActivity extends AppCompatActivity {
         initTitle.setText(initTitle.getText().toString() + ", " + userName);
         
         TextView initButton = findViewById(R.id.initButton);
+        Log.d("check", "0");
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         initButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("check", "1");
                 getLastLocation();
+                Log.d("check", "2");
 
-                Intent npScreenIntent = new Intent(getApplicationContext(), NearbyPlacesScreen.class);
-                npScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
-                npScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
-                startActivity(npScreenIntent);
             }
         });
 
@@ -73,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
                         requestNewLocationData();
                     } else {
                         pos = new Coord(location.getLatitude(), location.getLongitude());
+
+                        Intent npScreenIntent = new Intent(getApplicationContext(), NearbyPlacesScreen.class);
+                        npScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
+                        npScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
+                        startActivity(npScreenIntent);
                     }
                 });
                 return pos;

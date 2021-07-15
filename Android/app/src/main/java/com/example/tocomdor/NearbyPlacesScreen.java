@@ -17,14 +17,14 @@ public class NearbyPlacesScreen extends AppCompatActivity {
     Coord pos;
 
     private void makeLocais(){
-        locais.add(new Estabelecimento("UBS1","0","UBS","0","rua",-22.0027084f,-47.9014892f,0)); //UBS Santa Paula
         locais.add(new Estabelecimento("UBS2","0","UBS","0","rua",-21.9923223f,-47.8994458f,0)); //UBS Parque Delta
         locais.add(new Estabelecimento("UBS3","0","UBS","0","rua",-22.0132335f,-47.8732200f,0)); //UBS Vila Nery
         locais.add(new Estabelecimento("UBS4","0","UBS","0","rua",-21.9990533f,-47.9193520f,0)); //UBS Santa Felícia
         locais.add(new Estabelecimento("UBS5","0","UBS","0","rua",-22.0069998f,-47.8566658f,0)); //UBS Fagá
         locais.add(new Estabelecimento("UBS6","0","UBS","0","rua",-22.0005571f,-47.8816934f,0)); //UBS São José
         locais.add(new Estabelecimento("UBS7","0","UBS","0","rua",-22.0321964f,-47.8866095f,0)); //UBS Vila Isabel
-        locais.add(new Estabelecimento("UBS8","0","UBS","0","rua",-22.0590682f,-47.9067823f,0)); //UBS Cidade Aracy
+        locais.add(new Estabelecimento("UBS1","0","UBS","0","rua",-22.0590682f,-47.9067823f,0)); //UBS Cidade Aracy
+        locais.add(new Estabelecimento("UBS8","0","UBS","0","rua",-22.0027084f,-47.9014892f,0)); //UBS Santa Paula
     }
 
     @Override
