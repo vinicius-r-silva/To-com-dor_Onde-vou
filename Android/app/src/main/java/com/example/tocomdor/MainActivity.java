@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView initTitle = findViewById(R.id.initTitle);
         initTitle.setText(initTitle.getText().toString() + ", " + userName);
-
+        
         TextView initButton = findViewById(R.id.initButton);
         initButton.setOnClickListener(new View.OnClickListener() {
             @Override
