@@ -56,18 +56,16 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         }
         Log.d("Dist minha", "lat: " + pos.lat + ", lo: " + pos.lon);
 
-        //Estabelecimento estab = new Estabelecimento("Google", "(650) 253-0000", "empresa", "0001", "rua zero", 1234, 37.7749f, -122.4194f);
         Estabelecimento estab = locais.get(0);
-        String address = "1600 Amphitheatre Parkway, Mountain+View, California";
 
         TextView npName = findViewById(R.id.npNames);
         npName.setText(estab.getNome());
 
         TextView npAddContent = findViewById(R.id.npAddressContent);
-        npAddContent.setText(address);
+        npAddContent.setText(estab.getEndereco());
         npAddContent.setOnClickListener(v -> {
-            // Create a Uri from an intent string. Use the result to create an Intent.
-            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + address);
+            // Create a Uri from an intent string. Use the result to create an Intent
+            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + (float)estab.getLat() + "," + (float)estab.getLon());
 
             // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
