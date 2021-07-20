@@ -3,12 +3,15 @@ package com.example.tocomdor;
 import java.util.*;
 
 public class Formulario {
-    List<String> perSN = new ArrayList<>();
-    List<String> perText = new ArrayList<>();
-    List<Pergunta> perMult = new ArrayList<>();
+    List<String> perSN;
+    Hashtable<String, Boolean> perText;     // Pergunta, resposta númerica
+    List<Pergunta> perMult;
 
     public Formulario() {
+
         //perguntas de S/N
+        perSN = new ArrayList<>();
+
         perSN.add("Teve febre nos últimos 7 dias?");
         perSN.add("Teve calafrios nos últimos 7 dias?");
         perSN.add("Teve dor de garganta nos últimos 7 dias?");
@@ -23,17 +26,21 @@ public class Formulario {
         perSN.add("Foi vacinada?");
 
         //perguntas de caixa de texto
-        perText.add("Qual a idade do paciente?");
+        perText = new Hashtable<String, Boolean>();
+
+        perText.put("Qual a idade do paciente?", true);
 
         //perguntas de multiplas respostas
+        perMult = new ArrayList<>();
+
         String perMulTemp = "Você possui alguma comorbidade";
         List<String> res = new ArrayList<>();
         res.add("Diabetes Mellitus");
         res.add("Hipertensão Arterial Sistêmica/Pressão Alta");
         res.add("Cardiopatias");
-        res.add("Imunodeprimimidos (uso contínuo de corticoides, HIV, diálise/hemodiálise, quimioterapia");
+        res.add("Imunodeprimimidos (uso contínuo de corticoides, HIV, diálise/hemodiálise, quimioterapia)");
         res.add("Gestante");
-        res.add("Puérpera (mulher que teve filho até 42º dia pós parto");
+        res.add("Puérpera (mulher que teve filho até 42º dia pós parto)");
         res.add("Doenças respiratórias crônicas (enfisema pulmonar, asma, bronquite)");
 
         Pergunta perTemp = new Pergunta(perMulTemp, res);
@@ -44,7 +51,7 @@ public class Formulario {
         return perSN;
     }
 
-    public List<String> getPerText() {
+    public Hashtable<String, Boolean> getPerText() {
         return perText;
     }
 

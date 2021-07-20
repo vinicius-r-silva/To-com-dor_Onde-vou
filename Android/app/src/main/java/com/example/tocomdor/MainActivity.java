@@ -42,17 +42,15 @@ public class MainActivity extends AppCompatActivity {
         initTitle.setText(initTitle.getText().toString() + ", " + userName);
         
         TextView initButton = findViewById(R.id.initButton);
-        Log.d("check", "0");
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        initButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("check", "1");
-                getLastLocation();
-                Log.d("check", "2");
+        initButton.setOnClickListener(v -> {
 
-            }
+            Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
+            formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
+            formsScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
+            Log.d("Lat - lon:", pos.lat + " - " + pos.lon);
+            startActivity(formsScreenIntent);
         });
 
     }
@@ -76,10 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         pos = new Coord(location.getLatitude(), location.getLongitude());
 
-                        Intent npScreenIntent = new Intent(getApplicationContext(), NearbyPlacesScreen.class);
-                        npScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
-                        npScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
-                        startActivity(npScreenIntent);
                     }
                 });
                 return pos;

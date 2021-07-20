@@ -4,6 +4,10 @@ import java.util.*;
 
 public class Resposta {
 
+    public enum EnumRes {
+        SAFE, ISOLADO, CONSULTA, TESTE;
+    }
+
     List<Boolean> resSN = new ArrayList<>();
     List<String> resText = new ArrayList<>();
     List<List<String>> resMul = new ArrayList<>();
@@ -15,8 +19,10 @@ public class Resposta {
 
     String NSUS;
 
-    public Resposta(double lag, double lon, String NSUS) {
-        this.lat = lag;
+    public Resposta(){}
+
+    public Resposta(double lat, double lon, String NSUS) {
+        this.lat = lat;
         this.lon = lon;
         this.NSUS = NSUS;
     }
@@ -29,6 +35,63 @@ public class Resposta {
         this.lat = lag;
         this.lon = lon;
         this.NSUS = NSUS;
+    }
+
+    public EnumRes calcRes(){
+        int i = 0;
+        int quantSin = 0;
+        int age;
+        int quantComorb;
+
+        boolean cont = false;
+        boolean vac = false; //valorant anti cheat
+
+        for(i = 0; i < resSN.size() - 4; i++) {
+            if(resSN.get(i)) {
+                quantSin++;
+            }
+        }
+
+        for(; i < resSN.size() - 1; i++) {
+            if(resSN.get(i)) {
+                cont = true;
+                break;
+            }
+        }
+
+        if(resSN.get(resSN.size() - 1)){
+            vac = true;
+        }
+
+        age = Integer.parseInt(resText.get(0));
+        quantComorb = resMul.get(0).size();
+
+        switch (quantSin) {
+            case 0:
+                if(cont)
+                    return EnumRes.ISOLADO;
+
+                return EnumRes.SAFE;
+
+            case 1:
+                if((quantComorb > 0 && age > 60) || cont){
+                    return EnumRes.CONSULTA;
+                }
+
+                return EnumRes.ISOLADO;
+
+            case 2:
+                if((quantComorb > 0 && age > 60) || cont){
+                    return EnumRes.TESTE;
+                }
+
+                return EnumRes.CONSULTA;
+
+            default:
+                return EnumRes.TESTE;
+
+        }
+
     }
 
     public void addRes(List<String> res) {
