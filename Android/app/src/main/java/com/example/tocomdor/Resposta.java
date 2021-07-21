@@ -11,6 +11,7 @@ public class Resposta {
     List<Boolean> resSN = new ArrayList<>();
     List<String> resText = new ArrayList<>();
     List<List<String>> resMul = new ArrayList<>();
+    List<List<Integer>> resMulInt = new ArrayList<>();
 
     int result;
 
@@ -27,10 +28,11 @@ public class Resposta {
         this.NSUS = NSUS;
     }
 
-    public Resposta(List<Boolean> resSN, List<String> resText, List<List<String>> resMul, int result, double lag, double lon, String NSUS) {
+    public Resposta(List<Boolean> resSN, List<String> resText, List<List<String>> resMul, List<List<Integer>> resMulInt, int result, double lag, double lon, String NSUS) {
         this.resSN = resSN;
         this.resText = resText;
         this.resMul = resMul;
+        this.resMulInt = resMulInt;
         this.result = result;
         this.lat = lag;
         this.lon = lon;
@@ -91,66 +93,66 @@ public class Resposta {
                 return EnumRes.TESTE;
 
         }
-
     }
 
-    public void addRes(List<String> res) {
-        resMul.add(res);
+    public String getResStr() {
+        String res = "";
+        int i;
+        int j;
+
+        for (i = 0; i < resSN.size(); i++) {
+            if(resSN.get(i))
+                res.concat("1");
+            else
+                res.concat("0");
+        }
+
+        res.concat("|");
+
+        for (i = 0; i < resText.size(); i++) {
+            res.concat(resText.get(i) + "_");
+        }
+
+        res.concat("|");
+
+        for (i = 0; i < resMulInt.size(); i++) {
+            for (j = 0; j < resMulInt.get(i).size(); j++){
+                res.concat(resMulInt.get(i).get(j) + ".");
+
+            }
+            res.concat("_");
+        }
+
+        return  res;
     }
 
-    public List<Boolean> getResSN() {
-        return resSN;
-    }
+    public void addRes(List<String> res) { resMul.add(res); }
 
-    public void setResSN(List<Boolean> resSN) {
-        this.resSN = resSN;
-    }
+    public List<Boolean> getResSN() { return resSN; }
 
-    public List<String> getResText() {
-        return resText;
-    }
+    public void setResSN(List<Boolean> resSN) { this.resSN = resSN; }
 
-    public void setResText(List<String> resText) {
-            this.resText = resText;
-    }
+    public List<String> getResText() { return resText; }
 
-    public List<List<String>> getResMul() {
-        return resMul;
-    }
+    public void setResText(List<String> resText) { this.resText = resText; }
 
-    public void setResMul(List<List<String>> resMul) {
-        this.resMul = resMul;
-    }
+    public List<List<String>> getResMul() { return resMul; }
 
-    public int getResult() {
-        return result;
-    }
+    public void setResMul(List<List<String>> resMul) { this.resMul = resMul; }
 
-    public void setResult(int result) {
-        this.result = result;
-    }
+    public int getResult() { return result; }
 
-    public double getLat() {
-        return lat;
-    }
+    public void setResult(int result) { this.result = result; }
 
-    public void setLag(double lat) {
-        this.lat = lat;
-    }
+    public double getLat() { return lat; }
 
-    public double getLon() {
-        return lon;
-    }
+    public void setLag(double lat) { this.lat = lat; }
 
-    public void setLon(double lon) {
-        this.lon = lon;
-    }
+    public double getLon() { return lon; }
 
-    public String getNSUS() {
-        return NSUS;
-    }
+    public void setLon(double lon) { this.lon = lon; }
 
-    public void setNSUS(String NSUS) {
-        this.NSUS = NSUS;
-    }
+    public String getNSUS() { return NSUS; }
+
+    public void setNSUS(String NSUS) { this.NSUS = NSUS; }
 }
