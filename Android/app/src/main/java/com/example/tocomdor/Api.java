@@ -70,6 +70,7 @@ public class Api {
                         }
 
                         //TODO Chamar funcao de retorno
+                        Estabelecimento.Estabelecimentos.setEstabProximos(ests);
                     }
                 }, new Response.ErrorListener() {
 

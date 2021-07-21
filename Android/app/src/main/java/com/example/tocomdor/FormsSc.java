@@ -56,7 +56,6 @@ public class FormsSc extends AppCompatActivity {
         Formulario forms = new Formulario();
 
         List<String> perguntasSN = forms.getPerSN();
-
         int count = perguntasSN.size();
 
         List<Boolean> respostasSN = new ArrayList<>(count);
@@ -126,7 +125,7 @@ public class FormsSc extends AppCompatActivity {
         }
 
         List<Pergunta> perMult = forms.getPerMult();
-        List<List<String>> resMult = new ArrayList<>();
+        List<List<Integer>> resMult = new ArrayList<>();
         count = perMult.size();
 
         for(i = 0; i < count; i++){
@@ -139,7 +138,7 @@ public class FormsSc extends AppCompatActivity {
             tv.setText(perg.getPer());
 
             List<String> res = perg.getRes();
-            List<String> checked = new ArrayList<>();
+            List<Integer> checked = new ArrayList<>();
 
             for(int j = 0; j < res.size(); j++){
                 String alt = res.get(j);
@@ -148,12 +147,13 @@ public class FormsSc extends AppCompatActivity {
                 TextView tv2 = (TextView) view2.findViewById(R.id.answer_tv);
                 tv2.setText(alt);
 
+                int finalJ = j;
                 CheckBox cb = (CheckBox) view2.findViewById(R.id.answer_cb);
                 cb.setOnClickListener(v -> {
                     if(cb.isChecked()){
-                        checked.add(alt);
-                    }else if(checked.contains(alt)){
-                        checked.remove(alt);
+                        checked.add(finalJ);
+                    }else if(checked.contains(finalJ)){
+                        checked.remove(finalJ);
                     }
                 });
 
@@ -167,6 +167,11 @@ public class FormsSc extends AppCompatActivity {
         TextView sendBut = (TextView) findViewById(R.id.sendButton);
 
         sendBut.setOnClickListener(v -> {
+
+            for(List<Integer> res : resMult){
+                Collections.sort(res);
+            }
+
             Resposta resposta = new Resposta(respostasSN, respostasText, resMult, 0, lat, lon, "0");
 
             MyParcelable parc = new MyParcelable();

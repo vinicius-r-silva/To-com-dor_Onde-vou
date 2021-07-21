@@ -65,7 +65,7 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         npAddContent.setText(estab.getEndereco());
         npAddContent.setOnClickListener(v -> {
             // Create a Uri from an intent string. Use the result to create an Intent
-            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + (float)estab.getLat() + "," + (float)estab.getLon());
+            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + estab.getLat() + "," + estab.getLon());
 
             // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);

@@ -3,7 +3,22 @@ package com.example.tocomdor;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class Estabelecimento {
+
+    public static class Estabelecimentos{
+        private static List<Estabelecimento> estabProximos = null;
+
+        public static void setEstabProximos(List<Estabelecimento> estab){
+            estabProximos = estab;
+        }
+
+        public static List<Estabelecimento> getEstabProximos(){
+            return estabProximos;
+        }
+    }
+
     String nome;
     String tel;
     String tipo;

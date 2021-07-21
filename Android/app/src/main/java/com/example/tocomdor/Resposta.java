@@ -10,7 +10,7 @@ public class Resposta {
 
     List<Boolean> resSN = new ArrayList<>();
     List<String> resText = new ArrayList<>();
-    List<List<String>> resMul = new ArrayList<>();
+//    List<List<String>> resMul = new ArrayList<>();
     List<List<Integer>> resMulInt = new ArrayList<>();
 
     int result;
@@ -28,10 +28,9 @@ public class Resposta {
         this.NSUS = NSUS;
     }
 
-    public Resposta(List<Boolean> resSN, List<String> resText, List<List<String>> resMul, List<List<Integer>> resMulInt, int result, double lag, double lon, String NSUS) {
+    public Resposta(List<Boolean> resSN, List<String> resText, List<List<Integer>> resMulInt, int result, double lag, double lon, String NSUS) {
         this.resSN = resSN;
         this.resText = resText;
-        this.resMul = resMul;
         this.resMulInt = resMulInt;
         this.result = result;
         this.lat = lag;
@@ -66,7 +65,7 @@ public class Resposta {
         }
 
         age = Integer.parseInt(resText.get(0));
-        quantComorb = resMul.get(0).size();
+        quantComorb = resMulInt.get(0).size();
 
         switch (quantSin) {
             case 0:
@@ -126,7 +125,7 @@ public class Resposta {
         return  res;
     }
 
-    public void addRes(List<String> res) { resMul.add(res); }
+//    public void addRes(List<String> res) { resMul.add(res); }
 
     public List<Boolean> getResSN() { return resSN; }
 
@@ -136,9 +135,9 @@ public class Resposta {
 
     public void setResText(List<String> resText) { this.resText = resText; }
 
-    public List<List<String>> getResMul() { return resMul; }
+//    public List<List<String>> getResMul() { return resMul; }
 
-    public void setResMul(List<List<String>> resMul) { this.resMul = resMul; }
+//    public void setResMul(List<List<String>> resMul) { this.resMul = resMul; }
 
     public int getResult() { return result; }
 
