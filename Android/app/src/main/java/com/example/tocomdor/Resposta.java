@@ -111,7 +111,7 @@ public class Resposta {
     }
 
     public void setResText(List<String> resText) {
-        this.resText = resText;
+            this.resText = resText;
     }
 
     public List<List<String>> getResMul() {

@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         initButton.setOnClickListener(v -> {
+            Log.d("inicio", "inicio");
+            Api.getEstabelecimentos(-22.018525f,-47.9660977f,0.075f,getApplicationContext());
 
             Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
             formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);

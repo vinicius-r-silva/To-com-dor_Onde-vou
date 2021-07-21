@@ -12,6 +12,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -31,88 +34,103 @@ import java.util.Map;
 public class Api {
     public static void getEstabelecimentos(float lat, float lon, float range, final Context context ){
         RequestQueue queue = Volley.newRequestQueue(context);
-        //TODO add url
-        String url ="";
+//        String url ="https://tocomdor.uw.r.appspot.com/unidadeDetalhes";
+        String url ="https://tocomdor.uw.r.appspot.com/unidadesProximasRef";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+        JSONObject jsonobject = new JSONObject();
+        try {
+            jsonobject.put("latitude", lat);
+            jsonobject.put("longitude", lon);
+            jsonobject.put("margem", range);
+        } catch (Exception e){
+            Log.d("API", "JSON Error: " + e.getMessage());
+        }
+
+
+        JsonArrayRequest jsonArrReq = new JsonArrayRequest(
+                Request.Method.POST,url, jsonobject,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONArray response) {
+                        Log.d("api", "response: " + response.toString());
+                        Log.d("api", "response length: " + response.length());
+
+                        JSONObject json;
+                        Estabelecimento currEst;
+                        List<Estabelecimento> ests = new ArrayList<Estabelecimento>();
+
                         try {
-                            List<Estabelecimento> ests = new ArrayList<Estabelecimento>();
-                            Estabelecimento currEst;
-
-                            JSONArray jsArray = new JSONArray(response);
-                            JSONObject json;
-
-                            for (int i = 0; i < jsArray.length(); i++) {
-                                json = jsArray.getJSONObject(i);
+                            for (int i = 0; i < response.length(); i++) {
+                                json = response.getJSONObject(i);
                                 currEst = new Estabelecimento(json);
                                 ests.add(currEst);
                             }
-                            //TODO colocar retorno
-//                            repo.chegouresposta( ests );
-
-                        }catch (JSONException e) {
-                            //TODO colocar retorno
-//                           repo.chegouresposta( Collections.emptyList() );
+                        } catch (Exception e){
+                            Log.d("API", "JSON read Error: " + e.getMessage());
                         }
 
+                        //TODO Chamar funcao de retorno
                     }
                 }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("erro", "error response volley. " + error.toString());
+                Log.d("api", "Android Error: " + error.getMessage());
             }
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("latitude", Float.toString(lat));
-                params.put("longitude", Float.toString(lon));
-                params.put("margem", Float.toString(range));
-
-                return params;
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
             }
         };
-
-        queue.add(stringRequest);
+        queue.add(jsonArrReq);
     }
 
 
 
-    public static void getEstabelecimentos(Resposta resp, final Context context ) {
+    public static void registraResposta(Resposta resp, final Context context ) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        //TODO add url
-        String url ="";
+        String url ="https://tocomdor.uw.r.appspot.com/registraResposta";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+        JSONObject jsonobject = new JSONObject();
+        try {
+            jsonobject.put("latitude", resp.lat);
+            jsonobject.put("longitude", resp.lon);
+            jsonobject.put("resultado", resp.result);
+            jsonobject.put("respostas", "TODO");
+//            jsonobject.put("respostas", resp.get); //TODO Colocar a funcao do HB
+            jsonobject.put("versao", 1); //TODO Criar um recurso com a versao
+        } catch (Exception e){
+            Log.d("API", "JSON Error: " + e.getMessage());
+        }
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+                Request.Method.POST,url, jsonobject,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-                        //TODO verificar respostas com william
+                    public void onResponse(JSONObject response) {
+                        Log.d("api", "response: " + response.toString());
 
+                        //TODO Tratar Erros
                     }
                 }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("erro", "error response volley. " + error.toString());
+                Log.d("api", "Android Error: " + error.getMessage());
             }
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("latitude", Double.toString(resp.getLat()));
-                params.put("longitude", Double.toString(resp.getLon()));
-                params.put("resultado", Integer.toString(resp.getResult()));
-                params.put("resultado", "incompleto");
-                params.put("versao", Float.toString(R.string.versao));
-
-                return params;
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
             }
         };
-
-        queue.add(stringRequest);
+        queue.add(jsonObjReq);
     }
 }
