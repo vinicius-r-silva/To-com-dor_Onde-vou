@@ -62,7 +62,7 @@
         android:text="@string/addressLabel"
         android:textSize="18sp"
 
-        android:background="@drawable/border_label"
+        android:background="@drawable/border_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/npNames"/>
@@ -102,7 +102,7 @@
         android:text="@string/telephoneLabel"
         android:textSize="18sp"
 
-        android:background="@drawable/border_label"
+        android:background="@drawable/border_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/npAddressContent"/>

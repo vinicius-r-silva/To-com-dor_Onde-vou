@@ -44,7 +44,8 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         pos = new Coord(lat,lon);
 
         //Criar locais manualmente
-        makeLocais();
+        locais = Estabelecimento.Estabelecimentos.getEstabProximos();
+//        makeLocais();
 
         for (int i = 0; i < locais.size(); i++) {
             locais.get(i).setDist(pos.calcDist(new Coord(locais.get(i).lat,locais.get(i).lon)));
@@ -63,9 +64,14 @@ public class NearbyPlacesScreen extends AppCompatActivity {
 
         TextView npAddContent = findViewById(R.id.npAddressContent);
         npAddContent.setText(estab.getEndereco());
-        npAddContent.setOnClickListener(v -> {
+
+        TextView npAdd = findViewById(R.id.npAddress);
+        npAdd.setOnClickListener(v -> {
+            float latDest = estab.getLat();
+            float lonDest = estab.getLon();
             // Create a Uri from an intent string. Use the result to create an Intent
-            Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + estab.getLat() + "," + estab.getLon());
+//            Uri gmmIntentUri = Uri.parse("geo:" + latDest + "," + lonDest + "?q=" + latDest + "," + lonDest);
+            Uri gmmIntentUri = Uri.parse("geo:" + latDest + "," + lonDest + "?q=" + estab.getNome());
 
             // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -79,7 +85,9 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         TextView npTelContent = findViewById(R.id.npTelephoneContent);
         String tel = estab.getTel();
         npTelContent.setText(tel);
-        npTelContent.setOnClickListener(v -> {
+
+        TextView npTel = findViewById(R.id.npTelephone);
+        npTel.setOnClickListener(v -> {
             String number = tel.replaceAll("[^0-9]", "");
 
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
