@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class ResultScreen extends AppCompatActivity {
@@ -38,8 +39,13 @@ public class ResultScreen extends AppCompatActivity {
         resultRecommendation.setText(getRecommendationText(type));
 
         TextView resultBut = (TextView) findViewById(R.id.resultButton);
+
+        if(type == Resposta.EnumRes.SAFE){
+            resultBut.setVisibility(View.INVISIBLE);
+        }
+
         resultBut.setOnClickListener(v -> {
-            Intent npScreenIntent = new Intent(getApplicationContext(), PlacesScreen.class);
+            Intent npScreenIntent = new Intent(getApplicationContext(), NearbyPlacesScreen.class);
 
             npScreenIntent.putExtra("com.example.tocomdor.lat", lat);
             npScreenIntent.putExtra("com.example.tocomdor.lon", lon);

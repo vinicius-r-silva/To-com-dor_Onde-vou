@@ -18,6 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.snackbar.SnackbarContentLayout;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -69,6 +73,8 @@ public class FormsSc extends AppCompatActivity {
             RadioButton yesBut = (RadioButton) view.findViewById(R.id.yes_rb);
             RadioButton noBut = (RadioButton) view.findViewById(R.id.no_rb);
 
+            noBut.setChecked(true);
+
             int finalI = i;
             yesBut.setOnClickListener(v -> {
                 respostasSN.remove(finalI);
@@ -79,6 +85,7 @@ public class FormsSc extends AppCompatActivity {
                 respostasSN.remove(finalI);
                 respostasSN.add(finalI, false);
             });
+
 
             String text = perguntasSN.get(i);
 
@@ -168,7 +175,14 @@ public class FormsSc extends AppCompatActivity {
 
         sendBut.setOnClickListener(v -> {
 
-            for(List<Integer> res : resMult){
+            for(String resText : respostasText){
+                if(resText.equals("")){
+                    Snackbar.make(findViewById(R.id.formsLayout), "Campos não preenchidos", BaseTransientBottomBar.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            for(List<Integer> res : resMult) {
                 Collections.sort(res);
             }
 

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        android:paddingVertical="20dp">
+
+        <TextView
+            android:id="@+id/npName"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+
+            android:gravity="center"
+            android:paddingVertical="5dp"
+
+            android:fontFamily="@font/exo_2_bold"
+            android:hint="@string/unityHint"
+            android:textSize="21sp" />
+
+        <TextView
+            android:id="@+id/npAddress"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+
+            android:gravity="center"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="15dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="110dp"
+
+            android:fontFamily="@font/exo_2"
+            android:text="@string/addressLabel"
+            android:textSize="18sp"
+
+            android:background="@drawable/border_label"/>
+
+        <TextView
+            android:id="@+id/npAddressContent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+
+            android:gravity="center"
+            android:paddingVertical="5dp"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="30dp"
+
+            android:fontFamily="@font/exo_2"
+            android:hint="@string/addressHint"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/npDist"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+
+                    android:gravity="left"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
+
+                    android:fontFamily="@font/exo_2"
+                    android:text="@string/distLabel"
+                    android:textSize="19sp"
+
+                    android:background="@drawable/border_label" />
+
+                <TextView
+                    android:id="@+id/npDistContent"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+
+                    android:gravity="center"
+                    android:paddingVertical="5dp"
+
+                    android:layout_marginLeft="10dp"
+
+                    android:fontFamily="@font/exo_2"
+                    android:hint="@string/distHint"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/telephoneLayout"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/npTelephone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+
+                    android:gravity="right"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
+
+                    android:fontFamily="@font/exo_2"
+                    android:text="@string/telephoneLabel"
+                    android:textSize="19sp"
+
+                    android:background="@drawable/border_label"/>
+
+                <TextView
+                    android:id="@+id/npTelephoneContent"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+
+                    android:gravity="center"
+                    android:paddingVertical="5dp"
+
+                    android:layout_marginLeft="10dp"
+
+                    android:fontFamily="@font/exo_2"
+                    android:hint="@string/telephoneHint"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/separate_bar"/>
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

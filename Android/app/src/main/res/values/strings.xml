@@ -6,6 +6,8 @@
     <string name="unityHint">Nome da unidade</string>
     <string name="addressLabel">ENDEREÇO</string>
     <string name="addressHint">endereço</string>
+    <string name="distLabel">Distância aproximada</string>
+    <string name="distHint">distância</string>
     <string name="telephoneLabel">TELEFONE</string>
     <string name="telephoneHint">telefone</string>
     <string name="title_activity_forms_screen">ScrollingActivity</string>

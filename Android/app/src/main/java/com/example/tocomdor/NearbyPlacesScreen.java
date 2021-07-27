@@ -56,7 +56,7 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         locais.sort(Estabelecimento::compareTo);
 
         LayoutInflater layoutInflater = getLayoutInflater();
-        LinearLayout placesLayout = (LinearLayout) findViewById(R.id.places_layout);
+        LinearLayout placesLayout = (LinearLayout) findViewById(R.id.nearbyPlaces_layout);
 
         for(Estabelecimento local: locais){
             View view = layoutInflater.inflate(R.layout.place_info, null);
