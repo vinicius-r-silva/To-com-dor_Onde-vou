@@ -44,18 +44,29 @@ public class MainActivity extends AppCompatActivity {
         TextView initButton = findViewById(R.id.initButton);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
+        
+        pos = getLastLocation();
         initButton.setOnClickListener(v -> {
-            if(pos == null){
+            Log.d("inicio", "inicio");
+            Api.getEstabelecimentos(-22.018525f,-47.9660977f,0.075f,getApplicationContext());
+
+            for (int i = 0; i < 10 && pos == null; i++){
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {}
                 pos = getLastLocation();
             }
 
-            Api.getEstabelecimentos(pos.lat, pos.lon,0.5f,getApplicationContext());
+            if(pos != null){
+                Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
+                formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
+                formsScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
+                Log.d("Lat - lon:", pos.lat + " - " + pos.lon);
+                startActivity(formsScreenIntent);
+            }else{
+                Toast.makeText(this, "Localização não encontrada, por favor reinicie o app", Toast.LENGTH_LONG).show();
+            }
 
-            Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
-            formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
-            formsScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
-            startActivity(formsScreenIntent);
         });
     }
 
