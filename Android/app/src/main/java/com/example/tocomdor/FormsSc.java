@@ -165,9 +165,9 @@ public class FormsSc extends AppCompatActivity {
                 });
 
                 altLayout.addView(view2);
-                resMult.add(checked);
             }
 
+            resMult.add(checked);
             questionsLayout.addView(view);
         }
 
@@ -187,6 +187,8 @@ public class FormsSc extends AppCompatActivity {
             }
 
             Resposta resposta = new Resposta(respostasSN, respostasText, resMult, 0, lat, lon, "0");
+
+            Log.d("FORMS_SC", "Resposta: " + resposta.getResStr());
 
             Api.registraResposta(resposta, getApplicationContext());
 

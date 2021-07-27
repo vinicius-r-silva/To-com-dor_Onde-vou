@@ -101,28 +101,37 @@ public class Resposta {
 
         for (i = 0; i < resSN.size(); i++) {
             if(resSN.get(i))
-                res.concat("1");
+                res += "1";
             else
-                res.concat("0");
+                res += "0";
         }
 
-        res.concat("|");
+        res += "|";
 
         for (i = 0; i < resText.size(); i++) {
-            res.concat(resText.get(i) + "_");
+            res += resText.get(i);
+
+            if(i != resText.size() - 1){
+                res += "_";
+            }
         }
 
-        res.concat("|");
+        res += "|";
 
         for (i = 0; i < resMulInt.size(); i++) {
             for (j = 0; j < resMulInt.get(i).size(); j++){
-                res.concat(resMulInt.get(i).get(j) + ".");
+                res += resMulInt.get(i).get(j);
 
+                if(j != resMulInt.get(i).size() - 1);
+                    res += ".";
             }
-            res.concat("_");
+
+            if(i != resMulInt.size() - 1){
+                res += "_";
+            }
         }
 
-        return  res;
+        return res;
     }
 
 //    public void addRes(List<String> res) { resMul.add(res); }
