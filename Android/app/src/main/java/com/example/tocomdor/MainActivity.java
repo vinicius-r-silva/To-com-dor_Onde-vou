@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 pos = getLastLocation();
             }
 
-            Api.getEstabelecimentos(-22.018525f,-47.9660977f,0.075f,getApplicationContext());
+            Api.getEstabelecimentos(pos.lat, pos.lon,0.5f,getApplicationContext());
 
             Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
             formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);

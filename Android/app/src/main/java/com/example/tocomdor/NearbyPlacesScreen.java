@@ -85,7 +85,7 @@ public class NearbyPlacesScreen extends AppCompatActivity {
             });
 
             TextView npDistContent = view.findViewById(R.id.npDistContent);
-            npDistContent.setText(String.format("%.2f", local.getDist()));
+            npDistContent.setText(String.format("%.2f", local.getDist()) + "km");
 
             TextView npTelContent = view.findViewById(R.id.npTelephoneContent);
             String tel = local.getTel();

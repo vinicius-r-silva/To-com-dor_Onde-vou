@@ -188,6 +188,8 @@ public class FormsSc extends AppCompatActivity {
 
             Resposta resposta = new Resposta(respostasSN, respostasText, resMult, 0, lat, lon, "0");
 
+            Api.registraResposta(resposta, getApplicationContext());
+
             MyParcelable parc = new MyParcelable();
             parc.setObject(resposta);
 

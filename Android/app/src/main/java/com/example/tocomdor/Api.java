@@ -114,7 +114,7 @@ public class Api {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("api", "response: " + response.toString());
+                        Log.d("api", "response registra: " + response.toString());
 
                         //TODO Tratar Erros
                     }
