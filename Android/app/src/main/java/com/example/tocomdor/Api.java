@@ -98,11 +98,11 @@ public class Api {
 
         JSONObject jsonobject = new JSONObject();
         try {
+            jsonobject.put("nsus", Integer.toString(0));
             jsonobject.put("latitude", resp.lat);
             jsonobject.put("longitude", resp.lon);
             jsonobject.put("resultado", resp.result);
-            jsonobject.put("respostas", "TODO");
-//            jsonobject.put("respostas", resp.get); //TODO Colocar a funcao do HB
+            jsonobject.put("respostas", resp.getResStr()); //TODO Colocar a funcao do HB
             jsonobject.put("versao", 1); //TODO Criar um recurso com a versao
         } catch (Exception e){
             Log.d("API", "JSON Error: " + e.getMessage());
