@@ -4,9 +4,9 @@
 digraph g {
     rankdir="TB"
     splines=polyline
+    
 
-
-'nodes
+'nodes 
 
    Coord367483698[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
@@ -202,17 +202,32 @@ ResultScreen367483698[
 	shape=plaintext
 	fillcolor="#FFFFFF"
 ];
-'edges
-MainActivity367483698 -> Coord367483698[label="pos
-[0..1]"];
-NearbyPlacesScreen367483698 -> Estabelecimento367483698[label="locais
-[0..*]"];
-Formulario367483698 -> Pergunta367483698[label="perMult
-[0..*]"];
-NearbyPlacesScreen367483698 -> Coord367483698[label="pos
-[0..1]"];
-ResultScreen367483698 -> Resposta367483698[label="resposta
-[0..1]"];
+'edges    
+'MainActivity367483698 -> Coord367483698[label="pos
+'[0..1]"];
+'NearbyPlacesScreen367483698 -> Estabelecimento367483698[label="locais
+'[0..*]"];
+'Formulario367483698 -> Pergunta367483698[label="perMult
+'[0..*]"];
+'NearbyPlacesScreen367483698 -> Coord367483698[label="pos
+'[0..1]"];
+'ResultScreen367483698 -> Resposta367483698[label="resposta
+'[0..1]"];
 
+MainActivity367483698 -> FormsSc367483698
+MainActivity367483698 -> Api367483698
+'MainActivity367483698 -> Estabelecimento367483698
+MainActivity367483698 -> Coord367483698
+FormsSc367483698 -> ResultScreen367483698
+FormsSc367483698 -> Formulario367483698
+FormsSc367483698 -> Resposta367483698
+FormsSc367483698 -> MyParcelable367483698
+ResultScreen367483698 -> NearbyPlacesScreen367483698
+ResultScreen367483698 -> Resposta367483698
+ResultScreen367483698 -> MyParcelable367483698
+NearbyPlacesScreen367483698 -> Estabelecimento367483698
+NearbyPlacesScreen367483698 -> Coord367483698
+MyParcelable367483698 -> MyBinder367483698
+Formulario367483698 -> Pergunta367483698
 }
 @enduml
