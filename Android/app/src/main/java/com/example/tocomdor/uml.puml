@@ -1,0 +1,218 @@
+@startuml
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+
+
+'nodes
+
+   Coord367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Coord</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   lat: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   lon: float [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcDist(pos: Coord): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ quickDist(pos: Coord): float</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+MainActivity367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MainActivity</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   PERMISSION_ID: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   mFusedLocationClient: FusedLocationProviderClient [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mLocationCallback: LocationCallback [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   pos: Coord [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- checkPermissions(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" ># onCreate(savedInstanceState: Bundle)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ onRequestPermissionsResult(requestCode: int, permissions: String[], grantResults: int[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ onResume()</TD></TR>
+<TR><TD ALIGN="LEFT" >- requestNewLocationData()</TD></TR>
+<TR><TD ALIGN="LEFT" >- requestPermissions()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+   Estabelecimento367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Estabelecimento</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   CNES: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   dist: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   endereco: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   lat: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   lon: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   nome: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   tel: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   tipo: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ compareTo(e: Estabelecimento): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+NearbyPlacesScreen367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)NearbyPlacesScreen</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   locais: List&lt;Estabelecimento&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   pos: Coord [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- makeLocais()</TD></TR>
+<TR><TD ALIGN="LEFT" ># onCreate(savedInstanceState: Bundle)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Api367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Api</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ getEstabelecimentos(lat: float, lon: float, range: float, context: Context)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ registraResposta(resp: Resposta, context: Context)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+
+   Formulario367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Formulario</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   perMult: List&lt;Pergunta&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   perSN: List&lt;String&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   perText: Hashtable&lt;String, Boolean&gt; [0..*]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Pergunta367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Pergunta</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   per: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   res: List&lt;String&gt; [0..*]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+FormsSc367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FormsSc</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   lat: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   lon: float [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># onCreate(savedInstanceState: Bundle)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+MyBinder367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MyBinder</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   object: Object [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+
+   MyParcelable367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MyParcelable</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   myObject: Object [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ describeContents(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ writeToParcel(parcel: Parcel, flags: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+ Resposta367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Resposta</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   NSUS: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   lat: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   lon: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   resMulInt: List&lt;List&lt;Integer&gt;&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   resSN: List&lt;Boolean&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   resText: List&lt;String&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   result: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calcRes(): EnumRes</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ResultScreen367483698[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ResultScreen</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   lat: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   lon: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   resposta: Resposta [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   type: EnumRes [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- getRecommendationText(type: EnumRes): String</TD></TR>
+<TR><TD ALIGN="LEFT" ># onCreate(savedInstanceState: Bundle)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+'edges
+MainActivity367483698 -> Coord367483698[label="pos
+[0..1]"];
+NearbyPlacesScreen367483698 -> Estabelecimento367483698[label="locais
+[0..*]"];
+Formulario367483698 -> Pergunta367483698[label="perMult
+[0..*]"];
+NearbyPlacesScreen367483698 -> Coord367483698[label="pos
+[0..1]"];
+ResultScreen367483698 -> Resposta367483698[label="resposta
+[0..1]"];
+
+}
+@enduml
