@@ -39,7 +39,7 @@ public class ResultScreen extends AppCompatActivity {
 
         TextView resultBut = (TextView) findViewById(R.id.resultButton);
         resultBut.setOnClickListener(v -> {
-            Intent npScreenIntent = new Intent(getApplicationContext(), NearbyPlacesScreen.class);
+            Intent npScreenIntent = new Intent(getApplicationContext(), PlacesScreen.class);
 
             npScreenIntent.putExtra("com.example.tocomdor.lat", lat);
             npScreenIntent.putExtra("com.example.tocomdor.lon", lon);

@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,66 +36,71 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         setContentView(R.layout.activity_nearby_places_screen);
 
         float lat = 0;
+        float lon = 0;
+
         if(getIntent().hasExtra("com.example.tocomdor.lat")){
             lat = getIntent().getExtras().getFloat("com.example.tocomdor.lat");
         }
-        float lon = 0;
+
         if(getIntent().hasExtra("com.example.tocomdor.lon")){
             lon = getIntent().getExtras().getFloat("com.example.tocomdor.lon");
         }
 
-        pos = new Coord(lat,lon);
+        pos = new Coord(lat, lon);
 
-        //Criar locais manualmente
         locais = Estabelecimento.Estabelecimentos.getEstabProximos();
-//        makeLocais();
 
         for (int i = 0; i < locais.size(); i++) {
             locais.get(i).setDist(pos.calcDist(new Coord(locais.get(i).lat,locais.get(i).lon)));
         }
         locais.sort(Estabelecimento::compareTo);
 
-        for (int i = 0; i < locais.size(); i++){
-            Log.d("DistLocal", i + ": " + locais.get(i).getDist());
-        }
-        Log.d("Dist minha", "lat: " + pos.lat + ", lo: " + pos.lon);
+        LayoutInflater layoutInflater = getLayoutInflater();
+        LinearLayout placesLayout = (LinearLayout) findViewById(R.id.places_layout);
 
-        Estabelecimento estab = locais.get(0);
+        for(Estabelecimento local: locais){
+            View view = layoutInflater.inflate(R.layout.place_info, null);
 
-        TextView npName = findViewById(R.id.npNames);
-        npName.setText(estab.getNome());
+            String localName = local.getNome();
 
-        TextView npAddContent = findViewById(R.id.npAddressContent);
-        npAddContent.setText(estab.getEndereco());
+            TextView npName = view.findViewById(R.id.npName);
+            npName.setText(localName);
 
-        TextView npAdd = findViewById(R.id.npAddress);
-        npAdd.setOnClickListener(v -> {
-            float latDest = estab.getLat();
-            float lonDest = estab.getLon();
-            // Create a Uri from an intent string. Use the result to create an Intent
+            TextView npAddContent = view.findViewById(R.id.npAddressContent);
+            npAddContent.setText(local.getEndereco());
+            npAddContent.setOnClickListener(v -> {
+                float latDest = local.getLat();
+                float lonDest = local.getLon();
+                // Create a Uri from an intent string. Use the result to create an Intent
 //            Uri gmmIntentUri = Uri.parse("geo:" + latDest + "," + lonDest + "?q=" + latDest + "," + lonDest);
-            Uri gmmIntentUri = Uri.parse("geo:" + latDest + "," + lonDest + "?q=" + estab.getNome());
+                Uri gmmIntentUri = Uri.parse("geo:" + latDest + "," + lonDest + "?q=" + localName);
 
-            // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            // Make the Intent explicit by setting the Google Maps package
-            mapIntent.setPackage("com.google.android.apps.maps");
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
 
-            // Attempt to start an activity that can handle the Intent
-            startActivity(mapIntent);
-        });
+                // Attempt to start an activity that can handle the Intent
+                startActivity(mapIntent);
+            });
 
-        TextView npTelContent = findViewById(R.id.npTelephoneContent);
-        String tel = estab.getTel();
-        npTelContent.setText(tel);
+            TextView npDistContent = view.findViewById(R.id.npDistContent);
+            npDistContent.setText(String.format("%.2f", local.getDist()));
 
-        TextView npTel = findViewById(R.id.npTelephone);
-        npTel.setOnClickListener(v -> {
-            String number = tel.replaceAll("[^0-9]", "");
+            TextView npTelContent = view.findViewById(R.id.npTelephoneContent);
+            String tel = local.getTel();
+            npTelContent.setText(tel);
 
-            Intent callIntent = new Intent(Intent.ACTION_DIAL);
-            callIntent.setData(Uri.parse("tel:"+ number));
-            startActivity(callIntent);
-        });
+            LinearLayout telephoneLayout = view.findViewById(R.id.telephoneLayout);
+            telephoneLayout.setOnClickListener(v -> {
+                String number = tel.replaceAll("[^0-9]", "");
+
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:"+ number));
+                startActivity(callIntent);
+            });
+
+            placesLayout.addView(view);
+        }
     }
 }

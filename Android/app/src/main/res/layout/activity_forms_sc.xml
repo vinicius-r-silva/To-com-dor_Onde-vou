@@ -71,8 +71,6 @@
                 android:textSize="22sp"/>
 
         </LinearLayout>
-
-
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

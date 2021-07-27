@@ -44,17 +44,19 @@ public class MainActivity extends AppCompatActivity {
         TextView initButton = findViewById(R.id.initButton);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
         initButton.setOnClickListener(v -> {
-            Log.d("inicio", "inicio");
+            if(pos == null){
+                pos = getLastLocation();
+            }
+
             Api.getEstabelecimentos(-22.018525f,-47.9660977f,0.075f,getApplicationContext());
 
             Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
             formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
             formsScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
-            Log.d("Lat - lon:", pos.lat + " - " + pos.lon);
             startActivity(formsScreenIntent);
         });
-
     }
 
     @SuppressLint("MissingPermission")
