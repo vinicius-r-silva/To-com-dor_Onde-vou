@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,30 +25,24 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 public class MainActivity extends AppCompatActivity {
-    FusedLocationProviderClient mFusedLocationClient;
-    int PERMISSION_ID = 44;
+    public FusedLocationProviderClient mFusedLocationClient;
+    public int PERMISSION_ID = 44;
     public Coord pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        String userName = "Mateus";
-
         setContentView(R.layout.activity_main);
 
-        TextView initTitle = findViewById(R.id.initTitle);
-        initTitle.setText(initTitle.getText().toString() + ", " + userName);
-        
-        TextView initButton = findViewById(R.id.initButton);
-
+        // Comunicação com o GPS
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        
         pos = getLastLocation();
-        initButton.setOnClickListener(v -> {
-            Log.d("inicio", "inicio");
-            Api.getEstabelecimentos(-22.018525f,-47.9660977f,0.075f,getApplicationContext());
 
+        // Evento para o botão
+        TextView initButton = findViewById(R.id.initButton);
+        initButton.setOnClickListener(v -> {
+
+            // Verifica se a localização foi feita
             for (int i = 0; i < 10 && pos == null; i++){
                 try {
                     Thread.sleep(100);
@@ -57,8 +50,12 @@ public class MainActivity extends AppCompatActivity {
                 pos = getLastLocation();
             }
 
+            // Caso a posição tenha sido encontrada, cria o Intent para ir à próxima tela (Tela do Formulário)
             if(pos != null){
-                Intent formsScreenIntent = new Intent(getApplicationContext(), FormsSc.class);
+                // Pega a lista de estabelecimentos próximos
+                Api.getEstabelecimentos(pos.lat, pos.lon,0.075f,getApplicationContext());
+
+                Intent formsScreenIntent = new Intent(getApplicationContext(), FormsScreen.class);
                 formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
                 formsScreenIntent.putExtra("com.example.tocomdor.lon", pos.lon);
                 Log.d("Lat - lon:", pos.lat + " - " + pos.lon);
@@ -70,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Pega a coordenada do usuário comunicando com a localização do cliente
     @SuppressLint("MissingPermission")
     public Coord getLastLocation() {
         // check if permissions are given
@@ -78,10 +76,7 @@ public class MainActivity extends AppCompatActivity {
             // check if location is enabled
             if (isLocationEnabled()) {
 
-                // getting last
-                // location from
-                // FusedLocationClient
-                // object
+                // getting last location from FusedLocationClient object
                 mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
                     Location location = task.getResult();
                     if (location == null) {
@@ -99,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
         } else {
-            // if permissions aren't available,
-            // request for permissions
+            // if permissions aren't available, request for permissions
             requestPermissions();
 
             return null;

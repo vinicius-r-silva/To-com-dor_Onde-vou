@@ -10,7 +10,6 @@ public class Resposta {
 
     List<Boolean> resSN = new ArrayList<>();
     List<String> resText = new ArrayList<>();
-//    List<List<String>> resMul = new ArrayList<>();
     List<List<Integer>> resMulInt = new ArrayList<>();
 
     int result;
@@ -45,7 +44,6 @@ public class Resposta {
         int quantComorb;
 
         boolean cont = false;
-        boolean vac = false; //valorant anti cheat
 
         for(i = 0; i < resSN.size() - 4; i++) {
             if(resSN.get(i)) {
@@ -58,10 +56,6 @@ public class Resposta {
                 cont = true;
                 break;
             }
-        }
-
-        if(resSN.get(resSN.size() - 1)){
-            vac = true;
         }
 
         age = Integer.parseInt(resText.get(0));
@@ -134,8 +128,6 @@ public class Resposta {
         return res;
     }
 
-//    public void addRes(List<String> res) { resMul.add(res); }
-
     public List<Boolean> getResSN() { return resSN; }
 
     public void setResSN(List<Boolean> resSN) { this.resSN = resSN; }
@@ -143,10 +135,6 @@ public class Resposta {
     public List<String> getResText() { return resText; }
 
     public void setResText(List<String> resText) { this.resText = resText; }
-
-//    public List<List<String>> getResMul() { return resMul; }
-
-//    public void setResMul(List<List<String>> resMul) { this.resMul = resMul; }
 
     public int getResult() { return result; }
 

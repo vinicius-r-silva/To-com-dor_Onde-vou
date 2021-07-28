@@ -7,13 +7,13 @@ import java.util.List;
 
 public class Estabelecimento {
 
+    // Classe estática com a lista dos estabelecimentos
     public static class Estabelecimentos{
         private static List<Estabelecimento> estabProximos = null;
 
         public static void setEstabProximos(List<Estabelecimento> estab){
             estabProximos = estab;
         }
-
         public static List<Estabelecimento> getEstabProximos(){
             return estabProximos;
         }
@@ -28,12 +28,6 @@ public class Estabelecimento {
     float lat;
     float lon;
     float dist;
-
-
-    // public static void main(String[] args){
-    // 	Main est =  new Main(2,2, 4, 10101, "unidade1", "002323", "UBS");
-    // 	System.out.println(est);
-    // }
 
     public Estabelecimento(String nome, String tel, String tipo, String CNES, String endereco, float lat, float lon, float dist) {
         this.nome = nome;

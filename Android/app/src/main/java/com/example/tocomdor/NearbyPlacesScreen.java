@@ -16,19 +16,8 @@ import java.util.List;
 
 public class NearbyPlacesScreen extends AppCompatActivity {
     //Lista de locais
-    List<Estabelecimento> locais = new ArrayList<Estabelecimento>();
+    List<Estabelecimento> locais = new ArrayList<>();
     Coord pos;
-
-    private void makeLocais(){
-        locais.add(new Estabelecimento("UBS2","0","UBS","0","rua",-21.9923223f,-47.8994458f,0)); //UBS Parque Delta
-        locais.add(new Estabelecimento("UBS3","0","UBS","0","rua",-22.0132335f,-47.8732200f,0)); //UBS Vila Nery
-        locais.add(new Estabelecimento("UBS4","0","UBS","0","rua",-21.9990533f,-47.9193520f,0)); //UBS Santa Felícia
-        locais.add(new Estabelecimento("UBS5","0","UBS","0","rua",-22.0069998f,-47.8566658f,0)); //UBS Fagá
-        locais.add(new Estabelecimento("UBS6","0","UBS","0","rua",-22.0005571f,-47.8816934f,0)); //UBS São José
-        locais.add(new Estabelecimento("UBS7","0","UBS","0","rua",-22.0321964f,-47.8866095f,0)); //UBS Vila Isabel
-        locais.add(new Estabelecimento("UBS1","0","UBS","0","rua",-22.0590682f,-47.9067823f,0)); //UBS Cidade Aracy
-        locais.add(new Estabelecimento("UBS8","0","UBS","0","rua",-22.0027084f,-47.9014892f,0)); //UBS Santa Paula
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +44,9 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         }
         locais.sort(Estabelecimento::compareTo);
 
+        // Pega o LayoutInflater para automatizar o processo de criação dos widgets
         LayoutInflater layoutInflater = getLayoutInflater();
-        LinearLayout placesLayout = (LinearLayout) findViewById(R.id.nearbyPlaces_layout);
+        LinearLayout placesLayout = findViewById(R.id.nearbyPlaces_layout);
 
         for(Estabelecimento local: locais){
             View view = layoutInflater.inflate(R.layout.place_info, null);
@@ -71,18 +61,14 @@ public class NearbyPlacesScreen extends AppCompatActivity {
 
             LinearLayout addressLayout = view.findViewById(R.id.addressLayout);
             addressLayout.setOnClickListener(v -> {
-                float latDest = local.getLat();
-                float lonDest = local.getLon();
-                // Create a Uri from an intent string. Use the result to create an Intent
-//            Uri gmmIntentUri = Uri.parse("geo:" + latDest + "," + lonDest + "?q=" + latDest + "," + lonDest);
-                Uri gmmIntentUri = Uri.parse("geo:" + latDest + "," + lonDest + "?q=" + localName);
+                // Cria uma URI por uma intent string.
+                Uri gmmIntentUri = Uri.parse("geo:" + local.getLat() + "," + local.getLon() + "?q=" + localName);
 
-                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                // Cria uma Intent com a ação ACTION_VIEW
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps");
 
-                // Attempt to start an activity that can handle the Intent
+                // Define o pacote do Google Maps no Intent
+                mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
             });
 
@@ -97,6 +83,7 @@ public class NearbyPlacesScreen extends AppCompatActivity {
             telephoneLayout.setOnClickListener(v -> {
                 String number = tel.replaceAll("[^0-9]", "");
 
+                // Cira o Intent para discar o telefone do posto de saúde
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:"+ number));
                 startActivity(callIntent);

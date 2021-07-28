@@ -1,9 +1,6 @@
 package com.example.tocomdor;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,32 +17,26 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.snackbar.SnackbarContentLayout;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-public class FormsSc extends AppCompatActivity {
+public class FormsScreen extends AppCompatActivity {
 
-    float lat;
-    float lon;
+    private float lat;
+    private float lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forms_sc);
+        setContentView(R.layout.activity_forms_screen);
 
         lat = 0;
         lon = 0;
 
+        // Obtêm a latitude e longitude pela classe anterior
         if(getIntent().hasExtra("com.example.tocomdor.lat")){
             lat = getIntent().getExtras().getFloat("com.example.tocomdor.lat");
         }
@@ -54,24 +45,26 @@ public class FormsSc extends AppCompatActivity {
             lon = getIntent().getExtras().getFloat("com.example.tocomdor.lon");
         }
 
+        // Pega o LayoutInflater para criação automática do formulário
         LayoutInflater layoutInflater = getLayoutInflater();
-        LinearLayout questionsLayout = (LinearLayout) findViewById(R.id.questions_layout);
+        LinearLayout questionsLayout = findViewById(R.id.questions_layout);
 
         Formulario forms = new Formulario();
+        int i;
 
+        // Perguntas sim ou não
         List<String> perguntasSN = forms.getPerSN();
         int count = perguntasSN.size();
 
         List<Boolean> respostasSN = new ArrayList<>(count);
 
-        int i;
         for(i = 0; i < count; i++){
             respostasSN.add(false);
             View view = layoutInflater.inflate(R.layout.y_n_questions, null);
-            TextView tv = (TextView) view.findViewById(R.id.question_tv);
+            TextView tv = view.findViewById(R.id.question_tv);
 
-            RadioButton yesBut = (RadioButton) view.findViewById(R.id.yes_rb);
-            RadioButton noBut = (RadioButton) view.findViewById(R.id.no_rb);
+            RadioButton yesBut = view.findViewById(R.id.yes_rb);
+            RadioButton noBut = view.findViewById(R.id.no_rb);
 
             noBut.setChecked(true);
 
@@ -86,15 +79,14 @@ public class FormsSc extends AppCompatActivity {
                 respostasSN.add(finalI, false);
             });
 
-
             String text = perguntasSN.get(i);
 
             tv.setText(text);
             questionsLayout.addView(view);
         }
 
+        // Perguntas de texto (uma linha)
         Hashtable<String, Boolean> perguntasText = forms.getPerText();
-
         count = perguntasText.size();
 
         List<String> respostasText = new ArrayList<>(count);
@@ -108,9 +100,9 @@ public class FormsSc extends AppCompatActivity {
 
             if(perguntasText.get(text)){
                 View view = layoutInflater.inflate(R.layout.num_questions, null);
-                TextView tv = (TextView) view.findViewById(R.id.question_tv);
+                TextView tv = view.findViewById(R.id.question_tv);
 
-                EditText answerTxt = (EditText) view.findViewById(R.id.answer_tv);
+                EditText answerTxt = view.findViewById(R.id.answer_tv);
                 answerTxt.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -131,6 +123,7 @@ public class FormsSc extends AppCompatActivity {
             }
         }
 
+        // Perguntas com respostas múltiplas
         List<Pergunta> perMult = forms.getPerMult();
         List<List<Integer>> resMult = new ArrayList<>();
         count = perMult.size();
@@ -139,9 +132,9 @@ public class FormsSc extends AppCompatActivity {
             Pergunta perg = perMult.get(i);
 
             View view = layoutInflater.inflate(R.layout.mult_questions, null);
-            LinearLayout altLayout = (LinearLayout) view.findViewById(R.id.answers_layout);
+            LinearLayout altLayout = view.findViewById(R.id.answers_layout);
 
-            TextView tv = (TextView) view.findViewById(R.id.question_tv);
+            TextView tv = view.findViewById(R.id.question_tv);
             tv.setText(perg.getPer());
 
             List<String> res = perg.getRes();
@@ -151,11 +144,11 @@ public class FormsSc extends AppCompatActivity {
                 String alt = res.get(j);
 
                 View view2 = layoutInflater.inflate(R.layout.mult_answers, null);
-                TextView tv2 = (TextView) view2.findViewById(R.id.answer_tv);
+                TextView tv2 = view2.findViewById(R.id.answer_tv);
                 tv2.setText(alt);
 
                 int finalJ = j;
-                CheckBox cb = (CheckBox) view2.findViewById(R.id.answer_cb);
+                CheckBox cb = view2.findViewById(R.id.answer_cb);
                 cb.setOnClickListener(v -> {
                     if(cb.isChecked()){
                         checked.add(finalJ);
@@ -171,10 +164,9 @@ public class FormsSc extends AppCompatActivity {
             questionsLayout.addView(view);
         }
 
-        TextView sendBut = (TextView) findViewById(R.id.sendButton);
+        TextView sendBut = findViewById(R.id.sendButton);
 
         sendBut.setOnClickListener(v -> {
-
             for(String resText : respostasText){
                 if(resText.equals("")){
                     Snackbar.make(findViewById(R.id.formsLayout), "Campos não preenchidos", BaseTransientBottomBar.LENGTH_SHORT).show();
@@ -187,7 +179,6 @@ public class FormsSc extends AppCompatActivity {
             }
 
             Resposta resposta = new Resposta(respostasSN, respostasText, resMult, 0, lat, lon, "0");
-
             Log.d("FORMS_SC", "Resposta: " + resposta.getResStr());
 
             Api.registraResposta(resposta, getApplicationContext());
@@ -195,6 +186,7 @@ public class FormsSc extends AppCompatActivity {
             MyParcelable parc = new MyParcelable();
             parc.setObject(resposta);
 
+            // Intent para ir a próxima tela (Tela de Resultado)
             Intent resultScreenIntent = new Intent(getApplicationContext(), ResultScreen.class);
 
             resultScreenIntent.putExtra("com.example.tocomdor.Resposta", parc);

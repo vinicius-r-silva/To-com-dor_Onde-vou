@@ -1,9 +1,9 @@
 package com.example.tocomdor;
 
+// Classe da coordenada
 public class Coord{
 	public float lat;
 	public float lon;
-
 
 	public Coord(float la, float lo){
 		this.lat = la;
@@ -15,6 +15,7 @@ public class Coord{
 		this.lon = (float) lo;
 	}
 
+	// Método de determinação da distância
 	public float calcDist(Coord pos){
 		double lat1 = pos.lat;
 		double lat2 = lat;

@@ -31,11 +31,13 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+// Classe para comunicação com a API
 public class Api {
+
+    // Procura os estabelecimentos mais próximos pela localização do usuário
     public static void getEstabelecimentos(float lat, float lon, float range, final Context context ){
-        RequestQueue queue = Volley.newRequestQueue(context);
-//        String url ="https://tocomdor.uw.r.appspot.com/unidadeDetalhes";
         String url ="https://tocomdor.uw.r.appspot.com/unidadesProximasRef";
+        RequestQueue queue = Volley.newRequestQueue(context);
 
         JSONObject jsonobject = new JSONObject();
         try {
@@ -46,42 +48,35 @@ public class Api {
             Log.d("API", "JSON Error: " + e.getMessage());
         }
 
-
+        // Cria um requisição para um vetor
         JsonArrayRequest jsonArrReq = new JsonArrayRequest(
                 Request.Method.POST,url, jsonobject,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d("api", "response: " + response.toString());
-                        Log.d("api", "response length: " + response.length());
+                response -> {
+                    Log.d("api", "response: " + response.toString());
+                    Log.d("api", "response length: " + response.length());
 
-                        JSONObject json;
-                        Estabelecimento currEst;
-                        List<Estabelecimento> ests = new ArrayList<Estabelecimento>();
+                    JSONObject json;
+                    Estabelecimento currEst;
+                    List<Estabelecimento> ests = new ArrayList<>();
 
-                        try {
-                            for (int i = 0; i < response.length(); i++) {
-                                json = response.getJSONObject(i);
-                                currEst = new Estabelecimento(json);
-                                ests.add(currEst);
-                            }
-                        } catch (Exception e){
-                            Log.d("API", "JSON read Error: " + e.getMessage());
+                    try {
+                        for (int i = 0; i < response.length(); i++) {
+                            json = response.getJSONObject(i);
+                            currEst = new Estabelecimento(json);
+                            ests.add(currEst);
                         }
-
-                        //TODO Chamar funcao de retorno
-                        Estabelecimento.Estabelecimentos.setEstabProximos(ests);
+                    } catch (Exception e){
+                        Log.d("API", "JSON read Error: " + e.getMessage());
                     }
-                }, new Response.ErrorListener() {
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("api", "Android Error: " + error.getMessage());
-            }
-        }) {
+                    // Manda os estabelecimentos para a lista da classe estática Estabelecimentos
+                    Estabelecimento.Estabelecimentos.setEstabProximos(ests);
+                },
+
+                error -> Log.d("api", "Android Error: " + error.getMessage())) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
+                Map<String, String> headers = new HashMap<>();
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -89,8 +84,7 @@ public class Api {
         queue.add(jsonArrReq);
     }
 
-
-
+    // Registra a resposta do formulário do usuário na API
     public static void registraResposta(Resposta resp, final Context context ) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -102,8 +96,8 @@ public class Api {
             jsonobject.put("latitude", resp.lat);
             jsonobject.put("longitude", resp.lon);
             jsonobject.put("resultado", resp.result);
-            jsonobject.put("respostas", resp.getResStr()); //TODO Colocar a funcao do HB
-            jsonobject.put("versao", 1); //TODO Criar um recurso com a versao
+            jsonobject.put("respostas", resp.getResStr());
+            jsonobject.put("versao", R.string.versaoForms);
         } catch (Exception e){
             Log.d("API", "JSON Error: " + e.getMessage());
         }
@@ -111,23 +105,15 @@ public class Api {
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
                 Request.Method.POST,url, jsonobject,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("api", "response registra: " + response.toString());
+                response -> {
+                    Log.d("api", "response registra: " + response.toString());
 
-                        //TODO Tratar Erros
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("api", "Android Error: " + error.getMessage());
-            }
-        }) {
+                    //TODO Tratar Erros
+                },
+                error -> Log.d("api", "Android Error: " + error.getMessage())) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
+                Map<String, String> headers = new HashMap<>();
                 headers.put("Content-Type", "application/json");
                 return headers;
             }

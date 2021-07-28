@@ -9,11 +9,10 @@ import android.widget.TextView;
 
 public class ResultScreen extends AppCompatActivity {
 
-    Resposta resposta;
-    float lat;
-    float lon;
-
-    Resposta.EnumRes type;
+    private Resposta.EnumRes type;
+    private Resposta resposta;
+    private float lat;
+    private float lon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +34,17 @@ public class ResultScreen extends AppCompatActivity {
 
         type = resposta.calcRes();
 
-        TextView resultRecommendation = (TextView) findViewById(R.id.resultRecommendationTV);
+        TextView resultRecommendation = findViewById(R.id.resultRecommendationTV);
         resultRecommendation.setText(getRecommendationText(type));
 
-        TextView resultBut = (TextView) findViewById(R.id.resultButton);
+        TextView resultBut = findViewById(R.id.resultButton);
 
+        // Caso a resposta do usuário seja a melhor, não há necessidade de mostrar a ele a direção a algum posto de saúde
         if(type == Resposta.EnumRes.SAFE){
             resultBut.setVisibility(View.INVISIBLE);
         }
 
+        // Cria a intent para a próxima tela (Tela de Estabelecimentos Próximos)
         resultBut.setOnClickListener(v -> {
             Intent npScreenIntent = new Intent(getApplicationContext(), NearbyPlacesScreen.class);
 

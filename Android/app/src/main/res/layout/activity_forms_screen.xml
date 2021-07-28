@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_screen"
     android:fitsSystemWindows="true"
-    tools:context=".FormsSc">
+    tools:context=".FormsScreen">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nScroll_view"
