@@ -68,7 +68,9 @@ public class NearbyPlacesScreen extends AppCompatActivity {
 
             TextView npAddContent = view.findViewById(R.id.npAddressContent);
             npAddContent.setText(local.getEndereco());
-            npAddContent.setOnClickListener(v -> {
+
+            LinearLayout addressLayout = view.findViewById(R.id.addressLayout);
+            addressLayout.setOnClickListener(v -> {
                 float latDest = local.getLat();
                 float lonDest = local.getLon();
                 // Create a Uri from an intent string. Use the result to create an Intent
@@ -103,4 +105,6 @@ public class NearbyPlacesScreen extends AppCompatActivity {
             placesLayout.addView(view);
         }
     }
+
+
 }

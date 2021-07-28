@@ -12,63 +12,64 @@
         tools:ignore="MissingConstraints"
         android:paddingVertical="20dp">
 
-        <TextView
-            android:id="@+id/npName"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-
-            android:gravity="center"
-            android:paddingVertical="5dp"
-
-            android:fontFamily="@font/exo_2_bold"
-            android:hint="@string/unityHint"
-            android:textSize="21sp" />
-
-        <TextView
-            android:id="@+id/npAddress"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-
-            android:gravity="center"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="15dp"
-
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="110dp"
-
-            android:fontFamily="@font/exo_2"
-            android:text="@string/addressLabel"
-            android:textSize="18sp"
-
-            android:background="@drawable/border_label"/>
-
-        <TextView
-            android:id="@+id/npAddressContent"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-
-            android:gravity="center"
-            android:paddingVertical="5dp"
-
-            android:layout_marginTop="5dp"
-            android:layout_marginHorizontal="30dp"
-
-            android:fontFamily="@font/exo_2"
-            android:hint="@string/addressHint"
-            android:textSize="20sp" />
-
         <LinearLayout
+            android:id="@+id/addressLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            tools:ignore="MissingConstraints">
 
-            android:padding="20dp">
+            <TextView
+                android:id="@+id/npName"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+
+                android:gravity="center"
+                android:paddingVertical="5dp"
+
+                android:fontFamily="@font/exo_2_bold"
+                android:hint="@string/unityHint"
+                android:textSize="21sp" />
+
+            <TextView
+                android:id="@+id/npAddress"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="15dp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="110dp"
+
+                android:fontFamily="@font/exo_2"
+                android:text="@string/addressLabel"
+                android:textSize="18sp"
+
+                android:background="@drawable/border_label"/>
+
+            <TextView
+                android:id="@+id/npAddressContent"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+
+                android:gravity="center"
+                android:paddingVertical="5dp"
+
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="30dp"
+
+                android:fontFamily="@font/exo_2"
+                android:hint="@string/addressHint"
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
 
                 android:orientation="horizontal">
 
@@ -103,51 +104,53 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/telephoneLayout"
+        </LinearLayout>
 
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/telephoneLayout"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/npTelephone"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
 
-                android:layout_marginTop="10dp"
+                android:gravity="right"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="5dp"
 
-                android:orientation="horizontal">
+                android:fontFamily="@font/exo_2"
+                android:text="@string/telephoneLabel"
+                android:textSize="19sp"
 
-                <TextView
-                    android:id="@+id/npTelephone"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                android:background="@drawable/border_label"/>
 
-                    android:gravity="right"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="5dp"
+            <TextView
+                android:id="@+id/npTelephoneContent"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
 
-                    android:fontFamily="@font/exo_2"
-                    android:text="@string/telephoneLabel"
-                    android:textSize="19sp"
+                android:gravity="center"
+                android:paddingVertical="5dp"
 
-                    android:background="@drawable/border_label"/>
+                android:layout_marginLeft="10dp"
 
-                <TextView
-                    android:id="@+id/npTelephoneContent"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-
-                    android:gravity="center"
-                    android:paddingVertical="5dp"
-
-                    android:layout_marginLeft="10dp"
-
-                    android:fontFamily="@font/exo_2"
-                    android:hint="@string/telephoneHint"
-                    android:textSize="19sp" />
-
-            </LinearLayout>
+                android:fontFamily="@font/exo_2"
+                android:hint="@string/telephoneHint"
+                android:textSize="19sp" />
 
         </LinearLayout>
 
         <View android:layout_width="match_parent"
             android:layout_height="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/separate_bar"/>
 

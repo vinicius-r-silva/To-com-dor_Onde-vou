@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/exo_2"
                 android:text="Pergunta"
+                android:textColor="@color/black"
                 android:textSize="22sp"/>
 
             <EditText
@@ -34,7 +35,8 @@
                 android:singleLine="true"
 
                 android:fontFamily="@font/exo_2"
-                android:textSize="22sp"/>
+                android:textSize="22sp"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 

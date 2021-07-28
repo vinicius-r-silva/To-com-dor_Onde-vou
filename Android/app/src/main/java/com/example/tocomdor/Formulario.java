@@ -20,8 +20,8 @@ public class Formulario {
         perSN.add("Teve coriza nos últimos 7 dias?");
         perSN.add("Teve distúrbios olfativos nos últimos 7 dias?");
         perSN.add("Teve distúrbios gustativos nos últimos 7 dias?");
-        perSN.add("O paciente teve contato próximo com uma pessoa que seja caso SUSPEITO de Novo Coronavírus (COVID-19)?");
-        perSN.add("O paciente teve contato próximo com uma pessoa que seja caso CONFIRMADO de Novo Coronavírus (COVID-19)?");
+        perSN.add("O paciente teve contato próximo com uma pessoa que seja caso SUSPEITO de Novo Coronavírus (Covid-19)?");
+        perSN.add("O paciente teve contato próximo com uma pessoa que seja caso CONFIRMADO de Novo Coronavírus (Covid-19)?");
         perSN.add("Esteve em alguma unidade de saúde e/ou hospital (UBS) nos 14 dias antes do início dos sintomas?");
         perSN.add("Foi vacinada?");
 

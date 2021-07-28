@@ -57,14 +57,14 @@ public class ResultScreen extends AppCompatActivity {
     private String getRecommendationText(Resposta.EnumRes type){
         switch (type){
             case SAFE:
-                return "Você não apresenta nenhum dos principais indícios do SARS-CoV-2.";
+                return "Você não apresenta nenhum dos principais indícios do Covid-19.";
             case TESTE:
-                return "Você apresenta diversos fatores relacionados ao SARS-CoV-2. Recomendamos que agende um teste PCR.";
+                return "Você apresenta diversos fatores relacionados ao Covid-19. Recomendamos que agende um teste PCR.";
             case ISOLADO:
-                return "Você apresenta algum indício relacionado ao SARS-CoV-2. Recomendamos que fique em casa isolado e procure um médico no caso da persistência de seus sintomas ou aparecimento de novos sintomas.";
+                return "Você apresenta algum indício relacionado ao Covid-19. Recomendamos que fique em casa isolado e procure um médico no caso da persistência de seus sintomas ou aparecimento de novos sintomas.";
             case CONSULTA:
-                return "Você apresenta alguns indícios relacionados com o SARS-CoV-2. Recomendamos que procure uma unidade básica de saúde para orientações médicas.";
+                return "Você apresenta alguns indícios relacionados com o Covid-19. Recomendamos que procure uma unidade básica de saúde para orientações médicas.";
         }
-        return "Você não apresenta nenhum dos principais indícios do SARS-CoV-2.";
+        return "Você não apresenta nenhum dos principais indícios do Covid-19.";
     }
 }
