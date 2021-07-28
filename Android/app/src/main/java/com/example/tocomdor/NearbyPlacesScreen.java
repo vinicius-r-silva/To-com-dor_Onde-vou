@@ -48,7 +48,7 @@ public class NearbyPlacesScreen extends AppCompatActivity {
         LayoutInflater layoutInflater = getLayoutInflater();
         LinearLayout placesLayout = findViewById(R.id.nearbyPlaces_layout);
 
-        for(Estabelecimento local: locais){
+        for(Estabelecimento local: locais.subList(0, 7)){
             View view = layoutInflater.inflate(R.layout.place_info, null);
 
             String localName = local.getNome();

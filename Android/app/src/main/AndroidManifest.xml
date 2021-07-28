@@ -14,16 +14,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ToComDor">
+        android:theme="@style/Theme.ToComDor.NoActionBar">
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".ResultScreen" />
-        <activity android:name=".FormsScreen" />
-        <activity android:name=".NearbyPlacesScreen" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ResultScreen"
+                android:screenOrientation="portrait"/>
+        <activity android:name=".FormsScreen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NearbyPlacesScreen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

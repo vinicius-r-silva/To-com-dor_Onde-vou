@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             // Caso a posição tenha sido encontrada, cria o Intent para ir à próxima tela (Tela do Formulário)
             if(pos != null){
                 // Pega a lista de estabelecimentos próximos
-                Api.getEstabelecimentos(pos.lat, pos.lon,0.075f,getApplicationContext());
+                Api.getEstabelecimentos(pos.lat, pos.lon,0.5f,getApplicationContext());
 
                 Intent formsScreenIntent = new Intent(getApplicationContext(), FormsScreen.class);
                 formsScreenIntent.putExtra("com.example.tocomdor.lat", pos.lat);
